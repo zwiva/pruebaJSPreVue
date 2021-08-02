@@ -27,6 +27,7 @@ class Animal {
   get Sonido() {
     return this.sonido;
   }
+
   // imprimiendo() {
   //   console.log(`el animal tiene ${this.nombre}, ${this.edad}`);
   // }
@@ -127,7 +128,7 @@ class Aguila extends Animal {
 
 
   const addAnimalToTable = () => {
-    // selecciones animal:
+    // selecciona animal:
     // console.log('animalselected', animalSelected);
     // console.log('dataanimalselected', dataAnimalSelected);
 
@@ -137,17 +138,20 @@ class Aguila extends Animal {
     // agrega comentario:
     let commentCreated = commentCreatedElement.value;
 
+    // agrega imagen
     let imgCreated = `assets/imgs/${dataAnimalSelected[0].imagen}`;
+
+    // agrega sonido
     let soundCreated = `assets/sounds/${dataAnimalSelected[0].sonido}`;
 
+    // crea instancia de cada animal
     const leon = new Leon(animalSelected, ageSelected, imgCreated, commentCreated, soundCreated);
     const lobo = new Lobo(animalSelected, ageSelected, imgCreated, commentCreated, soundCreated);
     const oso = new Oso(animalSelected, ageSelected, imgCreated, commentCreated, soundCreated);
     const serpiente = new Serpiente(animalSelected, ageSelected, imgCreated, commentCreated, soundCreated);
     const aguila = new Aguila(animalSelected, ageSelected, imgCreated, commentCreated, soundCreated);
 
-    // const allAnimals = [leon, lobo, oso, serpiente, aguila];
-
+    // crea contenedor de img y controlaudio
     let animalInvestigated = document.createElement('div');
     animalInvestigated.style.display = 'flex';
     animalInvestigated.style.flexDirection = 'column';
@@ -156,26 +160,26 @@ class Aguila extends Animal {
     animalInvestigated.style.height = '18em';
     animalInvestigated.style.padding = '1em';
 
+    // crea imagen
     let animalInvestigatedImage = document.createElement('img');
+
+    // crea controlaudio
     let animalInvestigatedSound = document.createElement('audio');
 
+    // convierte seleccion a variable comparable en cada caso posible
     let animalSelectedToAdd = animalSelected.toLowerCase();
-    // console.log(animalSelectedToAdd) //leon
 
+    // crea casos para comparar la seleccion con cada instancia, en cada caso asigna el metodo de clase del animal respectivo 
     switch (animalSelectedToAdd) {
       case 'leon':
-        // console.log(leon.Img)
         animalInvestigatedImage.src = leon.img;
-        animalInvestigatedImage.toggle = 'modal';
         // data-toggle="modal" 
         // data-target="#exampleModal"
-        
         animalInvestigatedImage.style.width = '150px';
         animalInvestigatedSound.src = leon.rugir();
         animalInvestigatedSound.controls = true;
         animalInvestigatedSound.controlsList = "nodownload";
         animalInvestigatedSound.style.width = '150px';
-
         console.log(leon);
         break;
 
@@ -188,6 +192,7 @@ class Aguila extends Animal {
         animalInvestigatedSound.style.width = '150px';
         console.log(lobo);
         break;
+
       case 'oso':
         animalInvestigatedImage.src = oso.img;
         animalInvestigatedImage.style.width = '150px';
@@ -222,24 +227,15 @@ class Aguila extends Animal {
         console.log('ups, algo salio mal')
         break;
     }
+    // agrega imagen y sonido a cada instancia
     animalInvestigated.appendChild(animalInvestigatedImage);
     animalInvestigated.appendChild(animalInvestigatedSound);
+
+    //agrega elementos img y audio a contenedor
     animalsSectionElement.appendChild(animalInvestigated);
   }
 
   addAnimalBtn.addEventListener('click', addAnimalToTable);
-
-
-
-
-
-
-
-
-
-
-
-
 
 })();
 
