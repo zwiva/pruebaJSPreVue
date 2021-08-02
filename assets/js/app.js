@@ -109,6 +109,9 @@ class Aguila extends Animal {
 
   const animalsSectionElement = document.getElementById('Animales');
 
+  // animalsSectionElement.style.height= "100%";
+  // animalsSectionElement.style.margin= "0";
+  // animalsSectionElement.style.overflowY = "auto";
 
   const animalSelectionAndPreview = () => {
     // selecciona y filtra animal
@@ -135,7 +138,7 @@ class Aguila extends Animal {
     let commentCreated = commentCreatedElement.value;
 
     let imgCreated = `assets/imgs/${dataAnimalSelected[0].imagen}`;
-    let soundCreated = `assets/sounds/${dataAnimalSelected[0].sonido})`
+    let soundCreated = `assets/sounds/${dataAnimalSelected[0].sonido}`;
 
     const leon = new Leon(animalSelected, ageSelected, imgCreated, commentCreated, soundCreated);
     const lobo = new Lobo(animalSelected, ageSelected, imgCreated, commentCreated, soundCreated);
@@ -146,42 +149,82 @@ class Aguila extends Animal {
     // const allAnimals = [leon, lobo, oso, serpiente, aguila];
 
     let animalInvestigated = document.createElement('div');
+    animalInvestigated.style.display = 'flex';
+    animalInvestigated.style.flexDirection = 'column';
+    animalInvestigated.style.justifyContent = 'flex-end';
+    animalInvestigated.style.placeItems = 'center';
+    animalInvestigated.style.height = '18em';
+    animalInvestigated.style.padding = '1em';
+
     let animalInvestigatedImage = document.createElement('img');
+    let animalInvestigatedSound = document.createElement('audio');
+
     let animalSelectedToAdd = animalSelected.toLowerCase();
-    console.log(animalSelectedToAdd) //leon
-    
+    // console.log(animalSelectedToAdd) //leon
+
     switch (animalSelectedToAdd) {
       case 'leon':
-        console.log(leon.Img)
+        // console.log(leon.Img)
         animalInvestigatedImage.src = leon.img;
-        animalInvestigatedImage.style.height = '300px';
+        animalInvestigatedImage.toggle = 'modal';
+        // data-toggle="modal" 
+        // data-target="#exampleModal"
+        
+        animalInvestigatedImage.style.width = '150px';
+        animalInvestigatedSound.src = leon.rugir();
+        animalInvestigatedSound.controls = true;
+        animalInvestigatedSound.controlsList = "nodownload";
+        animalInvestigatedSound.style.width = '150px';
+
+        console.log(leon);
         break;
 
       case 'lobo':
-
+        animalInvestigatedImage.src = lobo.img;
+        animalInvestigatedImage.style.width = '150px';
+        animalInvestigatedSound.src = lobo.aullar();
+        animalInvestigatedSound.controls = true;
+        animalInvestigatedSound.controlsList = "nodownload";
+        animalInvestigatedSound.style.width = '150px';
+        console.log(lobo);
         break;
       case 'oso':
-
+        animalInvestigatedImage.src = oso.img;
+        animalInvestigatedImage.style.width = '150px';
+        animalInvestigatedSound.src = oso.gruñir();
+        animalInvestigatedSound.controls = true;
+        animalInvestigatedSound.controlsList = "nodownload";
+        animalInvestigatedSound.style.width = '150px';
+        console.log(oso);
         break;
+
       case 'serpiente':
-
+        animalInvestigatedImage.src = serpiente.img;
+        animalInvestigatedImage.style.width = '150px';
+        animalInvestigatedSound.src = serpiente.sissar();
+        animalInvestigatedSound.controls = true;
+        animalInvestigatedSound.controlsList = "nodownload";
+        animalInvestigatedSound.style.width = '150px';
+        console.log(serpiente);
         break;
-      case 'aguila':
 
+      case 'aguila':
+        animalInvestigatedImage.src = aguila.img;
+        animalInvestigatedImage.style.width = '150px';
+        animalInvestigatedSound.src = aguila.chillar();
+        animalInvestigatedSound.controls = true;
+        animalInvestigatedSound.controlsList = "nodownload";
+        animalInvestigatedSound.style.width = '150px';
+        console.log(aguila);
         break;
 
       default:
-        console.log('todo maaaal')
+        console.log('ups, algo salio mal')
         break;
     }
-
-
     animalInvestigated.appendChild(animalInvestigatedImage);
+    animalInvestigated.appendChild(animalInvestigatedSound);
     animalsSectionElement.appendChild(animalInvestigated);
-
-
-
-
   }
 
   addAnimalBtn.addEventListener('click', addAnimalToTable);
