@@ -1,100 +1,10 @@
+"use strict";
 
-class Animal {
-  constructor(nombre, edad, img, comentario, sonido) {
-    this.nombre = nombre;
-    this.edad = edad;
-    this.img = img;
-    this.comentario = comentario;
-    this.sonido = sonido;
-  }
-
-  get Nombre() {
-    return this.nombre;
-  }
-
-  get Edad() {
-    return this.edad;
-  }
-
-  get Img() {
-    return this.img;
-  }
-
-  set Comentario(nuevoComentario) {
-    this.comentario = nuevoComentario;
-  }
-
-  get Sonido() {
-    return this.sonido;
-  }
-
-  // imprimiendo() {
-  //   console.log(`el animal tiene ${this.nombre}, ${this.edad}`);
-  // }
-}
-
-
-class Leon extends Animal {
-  constructor(nombre, edad, img, comentario, sonido) {
-    super(nombre, edad, img, comentario, sonido);
-  }
-
-  rugir() {
-    return super.Sonido;
-  }
-
-}
-
-class Lobo extends Animal {
-  constructor(nombre, edad, img, comentario, sonido) {
-    super(nombre, edad, img, comentario, sonido);
-  }
-
-  aullar() {
-    return super.Sonido;
-  }
-
-}
-
-class Oso extends Animal {
-  constructor(nombre, edad, img, comentario, sonido) {
-    super(nombre, edad, img, comentario, sonido);
-  }
-
-  gruñir() {
-    return super.Sonido;
-  }
-}
-
-class Serpiente extends Animal {
-  constructor(nombre, edad, img, comentario, sonido) {
-    super(nombre, edad, img, comentario, sonido);
-  }
-
-  sissar() {
-    return super.Sonido;
-  }
-}
-
-class Aguila extends Animal {
-  constructor(nombre, edad, img, comentario, sonido) {
-    super(nombre, edad, img, comentario, sonido)
-  }
-
-  chillar() {
-    return super.Sonido;
-  }
-
-}
-
+import { Leon, Lobo, Oso, Serpiente, Aguila } from './animals.js'
 
 (async () => {
   let response = await fetch('./animales.json');
   let data = await response.json();
-  // console.log('data', data);
-
-  // const animal2 = new Animal('animal', '3a', 'img', 'esto es un comentario', 'esto es un sonido');
-  // animal2.imprimiendo();
 
   // captura animal:
   const animalSelectedElement = document.getElementById('animal');
@@ -169,13 +79,29 @@ class Aguila extends Animal {
     // convierte seleccion a variable comparable en cada caso posible
     let animalSelectedToAdd = animalSelected.toLowerCase();
 
+    //////////////////////////////////
+    
+    // modal: debe mostrarse(aun no), tener imagen (aun no), tener edad(aun no), tener texto comentario (aun no), tener hr (aun no), tener comentario (aun no);
+    let modalBody = document.getElementsByClassName(['modal-body']);
+
+    //////////////////////////////////
+
     // crea casos para comparar la seleccion con cada instancia, en cada caso asigna el metodo de clase del animal respectivo 
     switch (animalSelectedToAdd) {
       case 'leon':
+
+        const openmodal = () => {
+
+          console.log('edad', leon.edad);
+          console.log('comentario', leon.comentario);
+          modalBody[0].innerHTML = leon.comentario;
+        }
+
         animalInvestigatedImage.src = leon.img;
         // data-toggle="modal" 
         // data-target="#exampleModal"
         animalInvestigatedImage.style.width = '150px';
+        animalInvestigatedImage.onclick = openmodal;
         animalInvestigatedSound.src = leon.rugir();
         animalInvestigatedSound.controls = true;
         animalInvestigatedSound.controlsList = "nodownload";
@@ -236,6 +162,9 @@ class Aguila extends Animal {
   }
 
   addAnimalBtn.addEventListener('click', addAnimalToTable);
+
+  // const modal = document.getElementById('exampleModal');
+  // console.log(modal)
 
 })();
 
