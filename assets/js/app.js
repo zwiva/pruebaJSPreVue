@@ -79,74 +79,107 @@ import { Leon, Lobo, Oso, Serpiente, Aguila } from './animals.js'
     // convierte seleccion a variable comparable en cada caso posible
     let animalSelectedToAdd = animalSelected.toLowerCase();
 
-    //////////////////////////////////
+    // toma y recicla el modal con cada animal
+    const fillModal = (animal) => {
+      let modalBodyElement = document.getElementById('modalBody');
+      if (document.getElementById('modalImg') && document.getElementById('modalAge') && document.getElementById('modalhr') && document.getElementById('modalComment')) {
+        modalBodyElement.removeChild(document.getElementById('modalImg'));
+        modalBodyElement.removeChild(document.getElementById('modalAge'));
+        modalBodyElement.removeChild(document.getElementById('modalhr'));
+        modalBodyElement.removeChild(document.getElementById('modalComment'));
+      }
+      let modalImg = document.createElement('img');
+      modalImg.id = 'modalImg';
+      let modalAge = document.createElement('p');
+      modalAge.id = 'modalAge';
+      let modalhr = document.createElement('hr');
+      modalhr.id = 'modalhr';
+      let modalComment = document.createElement('p');
+      modalComment.id = 'modalComment';
+      modalImg.src = animal.img;
+      modalImg.style.width = '70%';
+      modalAge.innerHTML = animal.edad;
+      modalComment.innerHTML = animal.comentario;
+      modalBodyElement.appendChild(modalImg);
+      modalBodyElement.appendChild(modalAge);
+      modalBodyElement.appendChild(modalhr);
+      modalBodyElement.appendChild(modalComment);
+    }
     
-    // modal: debe mostrarse(aun no), tener imagen (aun no), tener edad(aun no), tener texto comentario (aun no), tener hr (aun no), tener comentario (aun no);
-    let modalBody = document.getElementsByClassName(['modal-body']);
-
-    //////////////////////////////////
+    // despliega modal
+    const openModal = () => {
+      $('#exampleModal').modal('show');
+    }
 
     // crea casos para comparar la seleccion con cada instancia, en cada caso asigna el metodo de clase del animal respectivo 
     switch (animalSelectedToAdd) {
       case 'leon':
-
-        const openmodal = () => {
-
-          console.log('edad', leon.edad);
-          console.log('comentario', leon.comentario);
-          modalBody[0].innerHTML = leon.comentario;
-        }
-
         animalInvestigatedImage.src = leon.img;
-        // data-toggle="modal" 
-        // data-target="#exampleModal"
         animalInvestigatedImage.style.width = '150px';
-        animalInvestigatedImage.onclick = openmodal;
+        animalInvestigatedImage.onclick = function () {
+          fillModal(leon);
+          openModal();
+        };
         animalInvestigatedSound.src = leon.rugir();
         animalInvestigatedSound.controls = true;
         animalInvestigatedSound.controlsList = "nodownload";
         animalInvestigatedSound.style.width = '150px';
-        console.log(leon);
         break;
 
       case 'lobo':
+        fillModal(lobo);
         animalInvestigatedImage.src = lobo.img;
         animalInvestigatedImage.style.width = '150px';
+        animalInvestigatedImage.onclick = function () {
+          fillModal(lobo);
+          openModal();
+        };
         animalInvestigatedSound.src = lobo.aullar();
         animalInvestigatedSound.controls = true;
         animalInvestigatedSound.controlsList = "nodownload";
         animalInvestigatedSound.style.width = '150px';
-        console.log(lobo);
         break;
 
       case 'oso':
+        fillModal(oso);
         animalInvestigatedImage.src = oso.img;
         animalInvestigatedImage.style.width = '150px';
+        animalInvestigatedImage.onclick = function () {
+          fillModal(lobo);
+          openModal();
+        };
         animalInvestigatedSound.src = oso.gruñir();
         animalInvestigatedSound.controls = true;
         animalInvestigatedSound.controlsList = "nodownload";
         animalInvestigatedSound.style.width = '150px';
-        console.log(oso);
         break;
 
       case 'serpiente':
+        fillModal(serpiente);
         animalInvestigatedImage.src = serpiente.img;
         animalInvestigatedImage.style.width = '150px';
+        animalInvestigatedImage.onclick = function () {
+          fillModal(lobo);
+          openModal();
+        };
         animalInvestigatedSound.src = serpiente.sissar();
         animalInvestigatedSound.controls = true;
         animalInvestigatedSound.controlsList = "nodownload";
         animalInvestigatedSound.style.width = '150px';
-        console.log(serpiente);
         break;
 
       case 'aguila':
+        fillModal(aguila);
         animalInvestigatedImage.src = aguila.img;
         animalInvestigatedImage.style.width = '150px';
+        animalInvestigatedImage.onclick = function () {
+          fillModal(lobo);
+          openModal();
+        };
         animalInvestigatedSound.src = aguila.chillar();
         animalInvestigatedSound.controls = true;
         animalInvestigatedSound.controlsList = "nodownload";
         animalInvestigatedSound.style.width = '150px';
-        console.log(aguila);
         break;
 
       default:
@@ -162,9 +195,6 @@ import { Leon, Lobo, Oso, Serpiente, Aguila } from './animals.js'
   }
 
   addAnimalBtn.addEventListener('click', addAnimalToTable);
-
-  // const modal = document.getElementById('exampleModal');
-  // console.log(modal)
 
 })();
 
